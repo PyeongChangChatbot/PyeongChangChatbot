@@ -30,11 +30,6 @@
 
         public async Task StartAsync(IDialogContext context)
         {
-            context.Wait(this.MessageReceivedAsync);
-        }
-
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
-        {
             PromptDialog.Choice(
                 context,
                 this.AfterChoiceSelected,
@@ -44,7 +39,7 @@
                 "원하시는 경기를 선택해주세요",
                 attempts: 3);
         }
-
+        
         private async Task AfterChoiceSelected(IDialogContext context, IAwaitable<string> result)
         {
             try

@@ -22,8 +22,7 @@
         {
             var message = await result;
             string dates = message.Text.Trim();
-
-            /* If the message returned is a valid name, return it to the calling dialog. */
+            
             if ((message.Text != null) && (dates.Length == 2) && (dates[0]>=48 && dates[0]<=57) && (dates[1] >= 48 && dates[1] <= 57))
             {
                 int exactDate = int.Parse(dates);
@@ -34,14 +33,14 @@
 
                     
                     
+
                     
                     //  데이터베이스에서 정보 끌어다놓기.
 
 
 
+                    
 
-                    /* Completes the dialog, removes it from the dialog stack, and returns the result to the parent/calling
-                    dialog. */
                     context.Done(dates);
                 }
                 else
@@ -55,14 +54,11 @@
                     }
                     else
                     {
-                        /* Fails the current dialog, removes it from the dialog stack, and returns the exception to the 
-                            parent/calling dialog. */
                         context.Fail(new TooManyAttemptsException("너무 많이 잘못된 메시지를 입력하였습니다."));
                     }
                 }
 
             }
-            /* Else, try again by re-prompting the user. */
             else
             {
                 --attempts;
@@ -74,14 +70,9 @@
                 }
                 else
                 {
-                    /* Fails the current dialog, removes it from the dialog stack, and returns the exception to the 
-                        parent/calling dialog. */
                     context.Fail(new TooManyAttemptsException("너무 많이 잘못된 메시지를 입력하였습니다."));
                 }
             }
-            
-
-
         }
     }
 

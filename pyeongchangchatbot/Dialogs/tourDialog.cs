@@ -22,11 +22,6 @@
 
         public async Task StartAsync(IDialogContext context)
         {
-            context.Wait(this.MessageReceivedAsync);
-        }
-
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
-        {
             Random r = new Random();
 
             int num = r.Next(1, 8);
@@ -37,7 +32,7 @@
                 await context.PostAsync(a[1]);
                 await context.PostAsync(a[2]);
             }
-            else if(num == 2)
+            else if (num == 2)
             {
                 await context.PostAsync(b[0]);
                 await context.PostAsync(b[1]);
@@ -99,9 +94,6 @@
                 context.Done(z);
 
             }
-            
-
-
         }
 
         private async Task AfterChoiceSelected(IDialogContext context, IAwaitable<string> result)
@@ -112,16 +104,13 @@
 
                 switch (selection)
                 {
-                    case "다시추천 (더블)" :
-                        context.Wait(this.MessageReceivedAsync);
+                    case "다시추천" :
+                        await this.StartAsync(context);
                         break;
                     case "처음으로" :
                         context.Done(selection);
                         break;
                 }
-
-                
-
             }
             catch (TooManyAttemptsException)
             {
